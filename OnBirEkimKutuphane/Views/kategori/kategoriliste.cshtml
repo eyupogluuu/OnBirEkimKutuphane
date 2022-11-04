@@ -1,0 +1,43 @@
+﻿@using OnBirEkimKutuphane.Models.entity
+@model List<kategori>
+@{
+    ViewBag.Title = "kategoriliste";
+    Layout = "~/Views/default_layout.cshtml";
+}
+
+<br />
+<h2 class="popover-header">Kategori Liste</h2>
+<br />
+
+<table class="table table-hover">
+    <tr>
+        <th>Kategori Adı</th>
+        <th>Kategoriye Ait Kitaplar</th>
+
+        @if (User.IsInRole("A"))
+        {
+            <th>Güncelle</th>
+            <th>Sil</th>
+        }
+
+    </tr>
+    @foreach (var k in Model)
+    {
+<tr>
+    <td>@k.kategoriAdi</td>
+    <td><a href="/kategori/kategorieser/@k.kategoriID" class="btn btn-outline-secondary">Kitaplar</a></td>
+    @if (User.IsInRole("A"))
+    {
+        <td><a class="btn btn-success" href="/kategori/kategorigetir/@k.kategoriID">Güncelle</a></td>
+        <td><a class="btn btn-danger" href="/kategori/kategorisil/@k.kategoriID">Sil</a></td>
+    }
+</tr>
+    }
+</table>
+<br />
+@if (User.IsInRole("A"))
+{
+    <a href="/kategori/yenikategori" class="btn btn btn-outline-primary">Yeni Kategori Ekle</a>
+}
+
+

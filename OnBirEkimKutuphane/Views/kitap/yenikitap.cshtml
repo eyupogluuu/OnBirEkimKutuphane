@@ -1,0 +1,36 @@
+﻿@model OnBirEkimKutuphane.Models.entity.kitap
+
+@{
+    ViewBag.Title = "yenikitap";
+    Layout = "~/Views/default_layout.cshtml";
+}
+
+<br />
+<h2 class="popover-header">Yeni Kitap Ekleme Sayfası</h2>
+<br />
+
+@using (Html.BeginForm("yenikitap", "kitap", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-group">Kitap Adı</label>
+                    <input type="text" name="kitapAdi" class="form-control" />
+                    <br />
+                    <label class="form-group">Yazarı</label>
+                    @Html.DropDownListFor(x => x.yazari, (List<SelectListItem>)ViewBag.yzr, new { @class = "form-control" })
+                    <br />
+                    <label class="form-group">Kategori</label>
+                    @Html.DropDownListFor(x => x.kategori, (List<SelectListItem>)ViewBag.ktgr, new { @class = "form-control" })
+                    <br />
+                    <label class="form-group">Görsel</label>
+                    <input type="file" name="File" class="form-control"  />
+                    <br />
+                    <button class="btn btn-outline-primary">Kaydet</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,32 @@
+﻿@model OnBirEkimKutuphane.Models.entity.kategori
+@{
+    ViewBag.Title = "kategorigetir";
+    Layout = "~/Views/default_layout.cshtml";
+}
+
+<br />
+<h2 class="popover-header">Kategori Güncelleme İşlemleri</h2>
+<br />
+@using (Html.BeginForm("kategoriguncelle", "kategori", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-group">Kategori Adı</label>
+                    @Html.TextBoxFor(x => x.kategoriAdi, new { @class = "form-control" })
+                    @*<input  type="text" name="kategoriAdi"/>*@
+                    <br />
+
+
+                    @Html.HiddenFor(x => x.kategoriID)
+                    <button class="btn btn-outline-primary">Güncelle</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+

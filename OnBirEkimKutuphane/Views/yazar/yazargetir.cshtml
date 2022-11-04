@@ -1,0 +1,32 @@
+﻿@model OnBirEkimKutuphane.Models.entity.yazar
+@{
+    ViewBag.Title = "yazargetir";
+    Layout = "~/Views/default_layout.cshtml";
+}
+
+<br />
+<h2 class="popover-header">Yazar Güncelleme İşlemleri</h2>
+<br />
+@using(Html.BeginForm("yazarguncelle", "yazar", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-group">Yazar Adı</label>
+                    @Html.TextBoxFor(x => x.yazarAdi, new { @class = "form-control" })
+                    <br />
+                    <label class="form-group">Yazar Soyadı</label>
+                    @Html.TextBoxFor(x => x.yazarSoyadi, new { @class = "form-control" })
+                    <br />
+
+                    @Html.HiddenFor(x => x.yazarID)
+                    <button class="btn btn-outline-primary">Güncelle</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+

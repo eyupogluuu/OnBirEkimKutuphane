@@ -1,0 +1,30 @@
+﻿@model OnBirEkimKutuphane.Models.entity.admin
+@{
+    ViewBag.Title = "guncelle";
+    Layout = "~/Views/default_layout.cshtml";
+}
+
+<br />
+<h2 class="popover-header">Bilgilerimi Güncelle</h2>
+<br />
+<div class="form-control">
+    <form method="post">
+        <label>Ad Soyad:</label>
+        <input type="text" name="adSoyad" value=@Model.adSoyad class="form-control" />
+        <br />
+        <label>E-Mail</label>
+        <input type="text" name="email" value=@Model.email class="form-control" />
+        <br />
+        <label>Sifre:</label>
+        <input type="text" name="sifre" value=@Model.sifre class="form-control" />
+        <br />
+        @*@if (User.IsInRole("A"))
+        {
+            <label>Rol</label>
+            <input type="text" name="rol" value=@Model.rol class="form-control" />
+        }*@
+
+        <br />
+        <button class="btn btn-outline-success">Güncelle</button>
+    </form>
+</div>

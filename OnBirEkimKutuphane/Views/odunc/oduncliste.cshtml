@@ -1,0 +1,33 @@
+﻿@using OnBirEkimKutuphane.Models.entity
+@model List<odunc>
+@{
+    ViewBag.Title = "oduncliste";
+    Layout = "~/Views/default_layout.cshtml";
+}
+
+<br />
+<h2 class="popover-header">Ödünç Listesi</h2>
+<br />
+<table class="table table-hover">
+    <tr>
+        <th>Ödünç Kitap</th>
+        <th>Ödünç Alan</th>
+        <th>Ödünç Veren</th>
+        <th>Ödünç Tarihi</th>
+        <th>Tavsiye İade Tarihi</th>
+    </tr>
+    @foreach (var o in Model)
+    {
+        <tr>
+            <td>@o.kitap1.kitapAdi</td>
+            <td>@o.uye.uyeAdiSoyadi</td>
+            <td>@o.personel.personelAdiSoyadi</td>
+            <td>@o.verilmetarihi.Date.Date</td>
+            <td>@o.tavsiyeedileniadetarihi</td>
+        </tr>
+    }
+</table>
+@*@if (User.IsInRole("A"))
+{
+    <a href="/odunc/yeniodunc/" class="btn btn-outline-primary">Yeni Ödünç Ver</a>
+}*@

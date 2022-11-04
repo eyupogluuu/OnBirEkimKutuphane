@@ -1,0 +1,94 @@
+﻿@using OnBirEkimKutuphane.Models.entity
+@model List<kitap>
+@{
+    ViewBag.Title = "kitapliste";
+    Layout = "~/Views/default_layout.cshtml";
+}
+<br />
+<h2 class="popover-header">Kitap Liste</h2>
+<br />
+
+@using (Html.BeginForm("kitapliste", "kitap", FormMethod.Get))
+{
+    <div style="float:right">
+        <p>
+            @Html.TextBox("ara", null, new { @class = "form-control", @placeholder = "Kitap veya Yazar Adı.." })
+        <input type="submit" value="Ara" style="float:right" />
+    </p>
+</div>
+}
+
+@*<div class="container">
+    @using (Html.BeginForm()) {
+
+        <div style="width:25%; float:right">
+            @Html.TextBox("ara")
+            <div style="float:right">
+                <input type="submit" name="btn" value="Ara" class="btn btn-outline-dark" />
+            </div>
+        </div>
+    }
+    </div>*@
+
+<br />
+
+
+<table class="table table-hover ">
+    <tr>
+        <th>Kitap Adi</th>
+        <th>Yazarı</th>
+        <th>Kategorisi</th>
+        <th>Görsel</th>
+        <th>Durum</th>
+        @if (User.IsInRole("A"))
+        {
+            <th>Güncelle</th>
+            <th>Sil</th>
+            <th>Ödünç/İade</th>
+        }
+
+    </tr>
+    @foreach (var k in Model)
+    {
+<tr>
+    <td>@k.kitapAdi</td>
+    <td>@k.yazar.yazarAdi @k.yazar.yazarSoyadi</td>
+    <td>@k.kategori1.kategoriAdi</td>
+    <td><img src="~/Content/image/@k.gorsel" width="75" height="75" /></td>
+    <td>
+        @if (k.durum == true)
+        {
+            <label class="bg-dark rounded-4 shadow font-italic" style="color:white">Rafta</label>
+
+        }
+        else
+        {
+            <label class="bg-white rounded-4 shadow font-italic" style="color:black">Ödünç </label>
+        }
+    </td>
+    @if (User.IsInRole("A"))
+    {
+        <td><a class="btn btn-success" href="/kitap/kitapgetir/@k.kitapID">Güncelle</a></td>
+        <td><a class="btn btn-danger" href="/kitap/kitapsil/@k.kitapID">Sil</a></td>
+        <td>
+            @if (k.durum == true)
+            {
+            <a class="btn btn-outline-info" href="/odunc/yeniodunc/">Ödünç Ver</a>
+
+            }
+            else
+            {
+            <a class="btn btn-outline-info" href="/iade/yeniiade/">İade Al</a>
+            }
+        </td>
+    }
+
+</tr>
+    }
+</table>
+<br />
+@if (User.IsInRole("A"))
+{
+    <a href="/kitap/yenikitap" class="btn btn btn-outline-primary">Yeni Kitap Ekle</a>
+}
+

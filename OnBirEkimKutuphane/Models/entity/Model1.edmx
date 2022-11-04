@@ -1,0 +1,694 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KutuphaneDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="adminID" />
+          </Key>
+          <Property Name="adminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adSoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sifre" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="rol" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="iade">
+          <Key>
+            <PropertyRef Name="iadeID" />
+          </Key>
+          <Property Name="iadeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kitap" Type="int" Nullable="false" />
+          <Property Name="iadeeden" Type="int" Nullable="false" />
+          <Property Name="iadealan" Type="smallint" Nullable="false" />
+          <Property Name="iadetarihi" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="kategori">
+          <Key>
+            <PropertyRef Name="kategoriID" />
+          </Key>
+          <Property Name="kategoriID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kategoriAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="kitap">
+          <Key>
+            <PropertyRef Name="kitapID" />
+          </Key>
+          <Property Name="kitapID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kitapAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="yazari" Type="smallint" Nullable="false" />
+          <Property Name="kategori" Type="smallint" Nullable="false" />
+          <Property Name="gorsel" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="durum" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="odunc">
+          <Key>
+            <PropertyRef Name="oduncID" />
+          </Key>
+          <Property Name="oduncID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kitap" Type="int" Nullable="false" />
+          <Property Name="oduncalan" Type="int" Nullable="false" />
+          <Property Name="oduncveren" Type="smallint" Nullable="false" />
+          <Property Name="verilmetarihi" Type="datetime" Nullable="false" />
+          <Property Name="tavsiyeedileniadetarihi" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="personel">
+          <Key>
+            <PropertyRef Name="personelID" />
+          </Key>
+          <Property Name="personelID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="personelAdiSoyadi" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rol">
+          <Key>
+            <PropertyRef Name="rolID" />
+          </Key>
+          <Property Name="rolID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rolAdi" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="uye">
+          <Key>
+            <PropertyRef Name="uyeID" />
+          </Key>
+          <Property Name="uyeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uyeAdiSoyadi" Type="nvarchar" MaxLength="50" />
+          <Property Name="uyeCinsiyet" Type="nvarchar" MaxLength="5" />
+          <Property Name="uyeDogumTarihi" Type="date" />
+          <Property Name="uyeAdres" Type="nvarchar" MaxLength="100" />
+          <Property Name="uyePuan" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="uyeRol" Type="smallint" />
+        </EntityType>
+        <EntityType Name="yazar">
+          <Key>
+            <PropertyRef Name="yazarID" />
+          </Key>
+          <Property Name="yazarID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="yazarAdi" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="yazarSoyadi" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_admin_rol">
+          <End Role="rol" Type="Self.rol" Multiplicity="1" />
+          <End Role="admin" Type="Self.admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rol">
+              <PropertyRef Name="rolID" />
+            </Principal>
+            <Dependent Role="admin">
+              <PropertyRef Name="rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iade_kitap1">
+          <End Role="kitap" Type="Self.kitap" Multiplicity="1" />
+          <End Role="iade" Type="Self.iade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kitap">
+              <PropertyRef Name="kitapID" />
+            </Principal>
+            <Dependent Role="iade">
+              <PropertyRef Name="kitap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iade_personel">
+          <End Role="personel" Type="Self.personel" Multiplicity="1" />
+          <End Role="iade" Type="Self.iade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personel">
+              <PropertyRef Name="personelID" />
+            </Principal>
+            <Dependent Role="iade">
+              <PropertyRef Name="iadealan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iade_uye">
+          <End Role="uye" Type="Self.uye" Multiplicity="1" />
+          <End Role="iade" Type="Self.iade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uye">
+              <PropertyRef Name="uyeID" />
+            </Principal>
+            <Dependent Role="iade">
+              <PropertyRef Name="iadeeden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kitap_kategori">
+          <End Role="kategori" Type="Self.kategori" Multiplicity="1" />
+          <End Role="kitap" Type="Self.kitap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kategori">
+              <PropertyRef Name="kategoriID" />
+            </Principal>
+            <Dependent Role="kitap">
+              <PropertyRef Name="kategori" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kitap_yazar">
+          <End Role="yazar" Type="Self.yazar" Multiplicity="1" />
+          <End Role="kitap" Type="Self.kitap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="yazar">
+              <PropertyRef Name="yazarID" />
+            </Principal>
+            <Dependent Role="kitap">
+              <PropertyRef Name="yazari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_odunc_kitap">
+          <End Role="kitap" Type="Self.kitap" Multiplicity="1" />
+          <End Role="odunc" Type="Self.odunc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kitap">
+              <PropertyRef Name="kitapID" />
+            </Principal>
+            <Dependent Role="odunc">
+              <PropertyRef Name="kitap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_odunc_personel">
+          <End Role="personel" Type="Self.personel" Multiplicity="1" />
+          <End Role="odunc" Type="Self.odunc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personel">
+              <PropertyRef Name="personelID" />
+            </Principal>
+            <Dependent Role="odunc">
+              <PropertyRef Name="oduncveren" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_odunc_uye">
+          <End Role="uye" Type="Self.uye" Multiplicity="1" />
+          <End Role="odunc" Type="Self.odunc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uye">
+              <PropertyRef Name="uyeID" />
+            </Principal>
+            <Dependent Role="odunc">
+              <PropertyRef Name="oduncalan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_uye_rol1">
+          <End Role="rol" Type="Self.rol" Multiplicity="0..1" />
+          <End Role="uye" Type="Self.uye" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rol">
+              <PropertyRef Name="rolID" />
+            </Principal>
+            <Dependent Role="uye">
+              <PropertyRef Name="uyeRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KutuphaneDBModelStoreContainer">
+          <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iade" EntityType="Self.iade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kategori" EntityType="Self.kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kitap" EntityType="Self.kitap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="odunc" EntityType="Self.odunc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="personel" EntityType="Self.personel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rol" EntityType="Self.rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="uye" EntityType="Self.uye" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="yazar" EntityType="Self.yazar" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_admin_rol" Association="Self.FK_admin_rol">
+            <End Role="rol" EntitySet="rol" />
+            <End Role="admin" EntitySet="admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iade_kitap1" Association="Self.FK_iade_kitap1">
+            <End Role="kitap" EntitySet="kitap" />
+            <End Role="iade" EntitySet="iade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iade_personel" Association="Self.FK_iade_personel">
+            <End Role="personel" EntitySet="personel" />
+            <End Role="iade" EntitySet="iade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iade_uye" Association="Self.FK_iade_uye">
+            <End Role="uye" EntitySet="uye" />
+            <End Role="iade" EntitySet="iade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kitap_kategori" Association="Self.FK_kitap_kategori">
+            <End Role="kategori" EntitySet="kategori" />
+            <End Role="kitap" EntitySet="kitap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kitap_yazar" Association="Self.FK_kitap_yazar">
+            <End Role="yazar" EntitySet="yazar" />
+            <End Role="kitap" EntitySet="kitap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_odunc_kitap" Association="Self.FK_odunc_kitap">
+            <End Role="kitap" EntitySet="kitap" />
+            <End Role="odunc" EntitySet="odunc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_odunc_personel" Association="Self.FK_odunc_personel">
+            <End Role="personel" EntitySet="personel" />
+            <End Role="odunc" EntitySet="odunc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_odunc_uye" Association="Self.FK_odunc_uye">
+            <End Role="uye" EntitySet="uye" />
+            <End Role="odunc" EntitySet="odunc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_uye_rol1" Association="Self.FK_uye_rol1">
+            <End Role="rol" EntitySet="rol" />
+            <End Role="uye" EntitySet="uye" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KutuphaneDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="adminID" />
+          </Key>
+          <Property Name="adminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sifre" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="rol" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="rol1" Relationship="Self.FK_admin_rol" FromRole="admin" ToRole="rol" />
+        </EntityType>
+        <EntityType Name="kategori">
+          <Key>
+            <PropertyRef Name="kategoriID" />
+          </Key>
+          <Property Name="kategoriID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kategoriAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="kitap" Relationship="Self.FK_kitap_kategori" FromRole="kategori" ToRole="kitap" />
+        </EntityType>
+        <EntityType Name="kitap">
+          <Key>
+            <PropertyRef Name="kitapID" />
+          </Key>
+          <Property Name="kitapID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kitapAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="yazari" Type="Int16" Nullable="false" />
+          <Property Name="kategori" Type="Int16" Nullable="false" />
+          <Property Name="gorsel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="durum" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="kategori1" Relationship="Self.FK_kitap_kategori" FromRole="kitap" ToRole="kategori" />
+          <NavigationProperty Name="yazar" Relationship="Self.FK_kitap_yazar" FromRole="kitap" ToRole="yazar" />
+          <NavigationProperty Name="iade" Relationship="KutuphaneDBModel.FK_iade_kitap" FromRole="kitap" ToRole="iade" />
+          <NavigationProperty Name="odunc" Relationship="KutuphaneDBModel.FK_odunc_kitap" FromRole="kitap" ToRole="odunc" />
+        </EntityType>
+        <EntityType Name="personel">
+          <Key>
+            <PropertyRef Name="personelID" />
+          </Key>
+          <Property Name="personelID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="personelAdiSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="iade" Relationship="KutuphaneDBModel.FK_iade_personel" FromRole="personel" ToRole="iade" />
+          <NavigationProperty Name="odunc" Relationship="KutuphaneDBModel.FK_odunc_personel" FromRole="personel" ToRole="odunc" />
+        </EntityType>
+        <EntityType Name="rol">
+          <Key>
+            <PropertyRef Name="rolID" />
+          </Key>
+          <Property Name="rolID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rolAdi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="admin" Relationship="Self.FK_admin_rol" FromRole="rol" ToRole="admin" />
+          <NavigationProperty Name="uye" Relationship="Self.FK_uye_rol" FromRole="rol" ToRole="uye" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="uye">
+          <Key>
+            <PropertyRef Name="uyeID" />
+          </Key>
+          <Property Name="uyeID" Type="Int32" Nullable="false" />
+          <Property Name="uyeAdiSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="uyeCinsiyet" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="uyeDogumTarihi" Type="DateTime" Precision="0" />
+          <Property Name="uyeAdres" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="uyePuan" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="uyeRol" Type="Int16" />
+          <NavigationProperty Name="rol" Relationship="Self.FK_uye_rol" FromRole="uye" ToRole="rol" />
+          <NavigationProperty Name="iade" Relationship="KutuphaneDBModel.FK_iade_uye" FromRole="uye" ToRole="iade" />
+          <NavigationProperty Name="odunc" Relationship="KutuphaneDBModel.FK_odunc_uye" FromRole="uye" ToRole="odunc" />
+        </EntityType>
+        <EntityType Name="yazar">
+          <Key>
+            <PropertyRef Name="yazarID" />
+          </Key>
+          <Property Name="yazarID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="yazarAdi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="yazarSoyadi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="kitap" Relationship="Self.FK_kitap_yazar" FromRole="yazar" ToRole="kitap" />
+        </EntityType>
+        <Association Name="FK_admin_rol">
+          <End Role="rol" Type="Self.rol" Multiplicity="1" />
+          <End Role="admin" Type="Self.admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rol">
+              <PropertyRef Name="rolID" />
+            </Principal>
+            <Dependent Role="admin">
+              <PropertyRef Name="rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kitap_kategori">
+          <End Role="kategori" Type="Self.kategori" Multiplicity="1" />
+          <End Role="kitap" Type="Self.kitap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kategori">
+              <PropertyRef Name="kategoriID" />
+            </Principal>
+            <Dependent Role="kitap">
+              <PropertyRef Name="kategori" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kitap_yazar">
+          <End Role="yazar" Type="Self.yazar" Multiplicity="1" />
+          <End Role="kitap" Type="Self.kitap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="yazar">
+              <PropertyRef Name="yazarID" />
+            </Principal>
+            <Dependent Role="kitap">
+              <PropertyRef Name="yazari" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_uye_rol">
+          <End Role="rol" Type="Self.rol" Multiplicity="0..1" />
+          <End Role="uye" Type="Self.uye" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rol">
+              <PropertyRef Name="rolID" />
+            </Principal>
+            <Dependent Role="uye">
+              <PropertyRef Name="uyeRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KutuphaneDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admin" EntityType="Self.admin" />
+          <EntitySet Name="kategori" EntityType="Self.kategori" />
+          <EntitySet Name="kitap" EntityType="Self.kitap" />
+          <EntitySet Name="personel" EntityType="Self.personel" />
+          <EntitySet Name="rol" EntityType="Self.rol" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="uye" EntityType="Self.uye" />
+          <EntitySet Name="yazar" EntityType="Self.yazar" />
+          <AssociationSet Name="FK_admin_rol" Association="Self.FK_admin_rol">
+            <End Role="rol" EntitySet="rol" />
+            <End Role="admin" EntitySet="admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kitap_kategori" Association="Self.FK_kitap_kategori">
+            <End Role="kategori" EntitySet="kategori" />
+            <End Role="kitap" EntitySet="kitap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kitap_yazar" Association="Self.FK_kitap_yazar">
+            <End Role="yazar" EntitySet="yazar" />
+            <End Role="kitap" EntitySet="kitap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_uye_rol" Association="Self.FK_uye_rol">
+            <End Role="rol" EntitySet="rol" />
+            <End Role="uye" EntitySet="uye" />
+          </AssociationSet>
+          <EntitySet Name="iade" EntityType="KutuphaneDBModel.iade" />
+          <EntitySet Name="odunc" EntityType="KutuphaneDBModel.odunc" />
+          <AssociationSet Name="FK_iade_kitap" Association="KutuphaneDBModel.FK_iade_kitap">
+            <End Role="kitap" EntitySet="kitap" />
+            <End Role="iade" EntitySet="iade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iade_personel" Association="KutuphaneDBModel.FK_iade_personel">
+            <End Role="personel" EntitySet="personel" />
+            <End Role="iade" EntitySet="iade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_iade_uye" Association="KutuphaneDBModel.FK_iade_uye">
+            <End Role="uye" EntitySet="uye" />
+            <End Role="iade" EntitySet="iade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_odunc_kitap" Association="KutuphaneDBModel.FK_odunc_kitap">
+            <End Role="kitap" EntitySet="kitap" />
+            <End Role="odunc" EntitySet="odunc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_odunc_personel" Association="KutuphaneDBModel.FK_odunc_personel">
+            <End Role="personel" EntitySet="personel" />
+            <End Role="odunc" EntitySet="odunc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_odunc_uye" Association="KutuphaneDBModel.FK_odunc_uye">
+            <End Role="uye" EntitySet="uye" />
+            <End Role="odunc" EntitySet="odunc" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="iade">
+          <Key>
+            <PropertyRef Name="iadeID" />
+          </Key>
+          <Property Name="iadeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kitap" Type="Int32" Nullable="false" />
+          <Property Name="iadeeden" Type="Int32" Nullable="false" />
+          <Property Name="iadealan" Type="Int16" Nullable="false" />
+          <Property Name="iadetarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="kitap1" Relationship="KutuphaneDBModel.FK_iade_kitap" FromRole="iade" ToRole="kitap" />
+          <NavigationProperty Name="personel" Relationship="KutuphaneDBModel.FK_iade_personel" FromRole="iade" ToRole="personel" />
+          <NavigationProperty Name="uye" Relationship="KutuphaneDBModel.FK_iade_uye" FromRole="iade" ToRole="uye" />
+        </EntityType>
+        <EntityType Name="odunc">
+          <Key>
+            <PropertyRef Name="oduncID" />
+          </Key>
+          <Property Name="oduncID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kitap" Type="Int32" Nullable="false" />
+          <Property Name="oduncalan" Type="Int32" Nullable="false" />
+          <Property Name="oduncveren" Type="Int16" Nullable="false" />
+          <Property Name="verilmetarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="tavsiyeedileniadetarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="kitap1" Relationship="KutuphaneDBModel.FK_odunc_kitap" FromRole="odunc" ToRole="kitap" />
+          <NavigationProperty Name="personel" Relationship="KutuphaneDBModel.FK_odunc_personel" FromRole="odunc" ToRole="personel" />
+          <NavigationProperty Name="uye" Relationship="KutuphaneDBModel.FK_odunc_uye" FromRole="odunc" ToRole="uye" />
+        </EntityType>
+        <Association Name="FK_iade_kitap">
+          <End Type="KutuphaneDBModel.kitap" Role="kitap" Multiplicity="1" />
+          <End Type="KutuphaneDBModel.iade" Role="iade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kitap">
+              <PropertyRef Name="kitapID" />
+            </Principal>
+            <Dependent Role="iade">
+              <PropertyRef Name="kitap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iade_personel">
+          <End Type="KutuphaneDBModel.personel" Role="personel" Multiplicity="1" />
+          <End Type="KutuphaneDBModel.iade" Role="iade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personel">
+              <PropertyRef Name="personelID" />
+            </Principal>
+            <Dependent Role="iade">
+              <PropertyRef Name="iadealan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_iade_uye">
+          <End Type="KutuphaneDBModel.uye" Role="uye" Multiplicity="1" />
+          <End Type="KutuphaneDBModel.iade" Role="iade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uye">
+              <PropertyRef Name="uyeID" />
+            </Principal>
+            <Dependent Role="iade">
+              <PropertyRef Name="iadeeden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_odunc_kitap">
+          <End Type="KutuphaneDBModel.kitap" Role="kitap" Multiplicity="1" />
+          <End Type="KutuphaneDBModel.odunc" Role="odunc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kitap">
+              <PropertyRef Name="kitapID" />
+            </Principal>
+            <Dependent Role="odunc">
+              <PropertyRef Name="kitap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_odunc_personel">
+          <End Type="KutuphaneDBModel.personel" Role="personel" Multiplicity="1" />
+          <End Type="KutuphaneDBModel.odunc" Role="odunc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personel">
+              <PropertyRef Name="personelID" />
+            </Principal>
+            <Dependent Role="odunc">
+              <PropertyRef Name="oduncveren" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_odunc_uye">
+          <End Type="KutuphaneDBModel.uye" Role="uye" Multiplicity="1" />
+          <End Type="KutuphaneDBModel.odunc" Role="odunc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="uye">
+              <PropertyRef Name="uyeID" />
+            </Principal>
+            <Dependent Role="odunc">
+              <PropertyRef Name="oduncalan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KutuphaneDBModelStoreContainer" CdmEntityContainer="KutuphaneDBEntities">
+          <EntitySetMapping Name="admin">
+            <EntityTypeMapping TypeName="KutuphaneDBModel.admin">
+              <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="adminID" ColumnName="adminID" />
+                <ScalarProperty Name="adSoyad" ColumnName="adSoyad" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="sifre" ColumnName="sifre" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kategori">
+            <EntityTypeMapping TypeName="KutuphaneDBModel.kategori">
+              <MappingFragment StoreEntitySet="kategori">
+                <ScalarProperty Name="kategoriID" ColumnName="kategoriID" />
+                <ScalarProperty Name="kategoriAdi" ColumnName="kategoriAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kitap">
+            <EntityTypeMapping TypeName="KutuphaneDBModel.kitap">
+              <MappingFragment StoreEntitySet="kitap">
+                <ScalarProperty Name="kitapID" ColumnName="kitapID" />
+                <ScalarProperty Name="kitapAdi" ColumnName="kitapAdi" />
+                <ScalarProperty Name="yazari" ColumnName="yazari" />
+                <ScalarProperty Name="kategori" ColumnName="kategori" />
+                <ScalarProperty Name="gorsel" ColumnName="gorsel" />
+                <ScalarProperty Name="durum" ColumnName="durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="personel">
+            <EntityTypeMapping TypeName="KutuphaneDBModel.personel">
+              <MappingFragment StoreEntitySet="personel">
+                <ScalarProperty Name="personelID" ColumnName="personelID" />
+                <ScalarProperty Name="personelAdiSoyadi" ColumnName="personelAdiSoyadi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rol">
+            <EntityTypeMapping TypeName="KutuphaneDBModel.rol">
+              <MappingFragment StoreEntitySet="rol">
+                <ScalarProperty Name="rolID" ColumnName="rolID" />
+                <ScalarProperty Name="rolAdi" ColumnName="rolAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KutuphaneDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="uye">
+            <EntityTypeMapping TypeName="KutuphaneDBModel.uye">
+              <MappingFragment StoreEntitySet="uye">
+                <ScalarProperty Name="uyeID" ColumnName="uyeID" />
+                <ScalarProperty Name="uyeAdiSoyadi" ColumnName="uyeAdiSoyadi" />
+                <ScalarProperty Name="uyeCinsiyet" ColumnName="uyeCinsiyet" />
+                <ScalarProperty Name="uyeDogumTarihi" ColumnName="uyeDogumTarihi" />
+                <ScalarProperty Name="uyeAdres" ColumnName="uyeAdres" />
+                <ScalarProperty Name="uyePuan" ColumnName="uyePuan" />
+                <ScalarProperty Name="uyeRol" ColumnName="uyeRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="yazar">
+            <EntityTypeMapping TypeName="KutuphaneDBModel.yazar">
+              <MappingFragment StoreEntitySet="yazar">
+                <ScalarProperty Name="yazarID" ColumnName="yazarID" />
+                <ScalarProperty Name="yazarAdi" ColumnName="yazarAdi" />
+                <ScalarProperty Name="yazarSoyadi" ColumnName="yazarSoyadi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iade">
+            <EntityTypeMapping TypeName="KutuphaneDBModel.iade">
+              <MappingFragment StoreEntitySet="iade">
+                <ScalarProperty Name="iadetarihi" ColumnName="iadetarihi" />
+                <ScalarProperty Name="iadealan" ColumnName="iadealan" />
+                <ScalarProperty Name="iadeeden" ColumnName="iadeeden" />
+                <ScalarProperty Name="kitap" ColumnName="kitap" />
+                <ScalarProperty Name="iadeID" ColumnName="iadeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="odunc">
+            <EntityTypeMapping TypeName="KutuphaneDBModel.odunc">
+              <MappingFragment StoreEntitySet="odunc">
+                <ScalarProperty Name="tavsiyeedileniadetarihi" ColumnName="tavsiyeedileniadetarihi" />
+                <ScalarProperty Name="verilmetarihi" ColumnName="verilmetarihi" />
+                <ScalarProperty Name="oduncveren" ColumnName="oduncveren" />
+                <ScalarProperty Name="oduncalan" ColumnName="oduncalan" />
+                <ScalarProperty Name="kitap" ColumnName="kitap" />
+                <ScalarProperty Name="oduncID" ColumnName="oduncID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

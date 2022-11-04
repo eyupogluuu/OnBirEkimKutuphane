@@ -1,0 +1,46 @@
+﻿@using OnBirEkimKutuphane.Models.entity
+@model List<uye>
+@{
+    ViewBag.Title = "uyeliste";
+    Layout = "~/Views/default_layout.cshtml";
+}
+
+<br />
+<h2 class="popover-header">Üyeler Listesi</h2>
+<br />
+<table class="table table-hover">
+    <tr>
+        <th>Ad Soyad</th>
+        <th>Cinsiyet</th>
+        <th>Doğum Tarihi</th>
+        <th>Adres</th>
+        <th>Puan</th>
+        @if (User.IsInRole("A"))
+        {
+            <th>Güncelle</th>
+            <th>Sil</th>
+        }
+
+    </tr>
+    @foreach (var u in Model)
+    {
+        <tr>
+            <td>@u.uyeAdiSoyadi</td>
+            <td>@u.uyeCinsiyet</td>
+            <td>@u.uyeDogumTarihi</td>
+            <td>@u.uyeAdres</td>
+            <td>@u.uyePuan</td>
+            
+            @if (User.IsInRole("A"))
+            {
+                <td><a class="btn btn-success" href="/uye/uyegetir/@u.uyeID">Güncelle</a></td>
+                <td><a class="btn btn-danger" href="/uye/uyesil/@u.uyeID">Sil</a></td>
+            }
+        </tr>
+    }
+</table>
+<br />
+@if (User.IsInRole("A"))
+{
+    <a href="/uye/yeniuye" class="btn btn btn-outline-primary">Yeni Üye Ekle</a>
+}

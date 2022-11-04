@@ -1,0 +1,30 @@
+﻿@using OnBirEkimKutuphane.Models.entity
+@model List<admin>
+@{
+    ViewBag.Title = "adminliste";
+    Layout = "~/Views/default_layout.cshtml";
+}
+
+<br />
+<h2 class="popover-header">Kullanıcı Liste</h2>
+<br />
+
+<table class="table table-hover">
+    <tr>
+        <th>Ad Soyad </th>
+        <th>E-mail </th>
+        <th>Şifre  </th>
+        <th>Rol </th>
+    </tr>
+    @foreach (var a in Model)
+    {
+        <tr>
+            <td>@a.adSoyad</td>
+            <td>@a.email</td>
+            <td>@a.sifre</td>
+            <td>@a.rol</td>
+        </tr>
+    }
+</table>
+<br />
+

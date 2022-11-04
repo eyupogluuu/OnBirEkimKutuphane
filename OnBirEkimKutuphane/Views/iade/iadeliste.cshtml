@@ -1,0 +1,34 @@
+﻿@using OnBirEkimKutuphane.Models.entity
+@model List<iade>
+@{
+    ViewBag.Title = "iadeliste";
+    Layout = "~/Views/default_layout.cshtml";
+}
+
+<br />
+<h2 class="popover-header">Ödünç Listesi</h2>
+<br />
+<table class="table table-hover">
+    <tr>
+        <th>İade Kitap</th>
+        <th>İade Eden</th>
+        <th>İade Alan</th>
+        <th>İade Tarihi</th>
+     
+    </tr>
+    @foreach (var i in Model)
+    {
+        <tr>
+            <td>@i.kitap1.kitapAdi</td>
+            <td>@i.uye.uyeAdiSoyadi</td>
+            <td>@i.personel.personelAdiSoyadi</td>
+            <td>@i.iadetarihi</td>
+            
+        </tr>
+    }
+</table>
+@*@if (User.IsInRole("A"))
+{
+    <a href="/iade/yeniiade/" class="btn btn-outline-primary">Yeni İade Al</a>
+}*@
+

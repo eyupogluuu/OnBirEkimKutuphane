@@ -1,0 +1,22 @@
+﻿@model OnBirEkimKutuphane.Models.entity.admin
+@{
+    ViewBag.Title = "sifrereset";
+    Layout = "~/Views/default_layout.cshtml";
+}
+
+<br />
+<h2 class="popover-header">Şifre Değiştir</h2>
+<br />
+<h1>@ViewBag.uayri</h1>
+@using(Html.BeginForm("sifrereset","hesap",FormMethod.Post))
+{ 
+<br />
+<div class="container">
+    <div class="form-group">
+        <input type="text" name="email" placeholder="email adresiniz" />
+        <br />
+        <br />
+        <input type="submit" class="btn btn-outline-primary" value="Şifreyi sıfırla" />
+    </div>
+</div>
+}

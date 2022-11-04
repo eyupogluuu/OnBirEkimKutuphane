@@ -1,0 +1,36 @@
+﻿@model OnBirEkimKutuphane.Models.entity.odunc
+@{
+    ViewBag.Title = "yeniodunc";
+    Layout = "~/Views/default_layout.cshtml";
+}
+<br />
+<h2 class="popover-header">Yeni Ödünç Ver</h2>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <label class="form-group">Ödünç Kitap</label>
+                @Html.DropDownListFor(x => x.kitap, (List<SelectListItem>)ViewBag.ktp, new { @class = "form-control" })
+                <br />
+                <label class="form-group">Ödünç Alan</label>
+                @Html.DropDownListFor(x => x.oduncalan, (List<SelectListItem>)ViewBag.uye, new { @class = "form-control" })
+                <br />
+                <label class="form-group">Ödünç Veren</label>
+                @Html.DropDownListFor(x => x.oduncveren, (List<SelectListItem>)ViewBag.prs, new { @class = "form-control" })
+                <br />
+                <label class="form-group">Ödünç Tarihi</label>
+                @Html.TextBoxFor(x => x.verilmetarihi,  new { @class = "form-control", })
+                <br />
+                <label class="form-group">İade Tarihi</label>
+                @Html.TextBoxFor(x => x.tavsiyeedileniadetarihi, new { @class = "form-control" })
+                <br />
+                <button class="btn btn-outline-primary">Kaydet</button>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+

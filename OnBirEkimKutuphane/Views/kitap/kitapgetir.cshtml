@@ -1,0 +1,44 @@
+﻿@model OnBirEkimKutuphane.Models.entity.kitap
+@{
+    ViewBag.Title = "kitapgetir";
+    Layout = "~/Views/default_layout.cshtml";
+}
+<br />
+<h2 class="popover-header">Kitap Güncelleme İşlemleri</h2>
+<br />
+@using (Html.BeginForm("kitapguncelle", "kitap", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-group">Kitap Adı</label>
+                    @Html.TextBoxFor(x => x.kitapAdi, new { @class = "form-control" })
+                    <br />
+                    <label class="form-group">Yazarı</label>
+                    @Html.DropDownListFor(x => x.yazari, (List<SelectListItem>)ViewBag.yzr, new { @class = "form-control" })
+
+                    <br />
+                    <label class="form-group">Kategori</label>
+                    @Html.DropDownListFor(x => x.kategori, (List<SelectListItem>)ViewBag.ktgr, new { @class = "form-control" })
+
+                    <br />
+                    <label class="form-group">Önceki Görsel</label>
+                    <img src="~/Content/image/@Model.gorsel" width="75" height="75" />
+                    <br />
+                    <label class="form-group">Yeni Görsel</label>
+                    <input type="file" name="File" />
+                    <br />
+                    <label class="form-group">Durum</label>
+                    @Html.TextBoxFor(x => x.durum, new { @class = "form-control" })
+                    <br />
+                    @Html.HiddenFor(x => x.kitapID)
+                    <button class="btn btn-outline-primary">Güncelle</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+

@@ -1,0 +1,43 @@
+﻿@model OnBirEkimKutuphane.Models.entity.uye
+@{
+    ViewBag.Title = "uyegetir";
+    Layout = "~/Views/default_layout.cshtml";
+}
+
+<br />
+<h2 class="popover-header">Üye Güncelleme İşlemleri</h2>
+<br />
+@using (Html.BeginForm("uyeguncelle", "uye", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-group">Ad Soyad</label>
+                    @Html.TextBoxFor(x => x.uyeAdiSoyadi, new { @class = "form-control" })
+                    <br />
+                    <label class="form-group">Cinsiyet</label>
+                    @Html.TextBoxFor(x => x.uyeCinsiyet, new { @class = "form-control" })
+                    <br />
+                    <label class="form-group">Doğum Tarihi</label>
+                    @Html.TextBoxFor(x=>x.uyeDogumTarihi,new  { @class="form-control"})
+                    <br />
+                    <label class="form-group">Adres</label>
+                    @Html.TextBoxFor(x => x.uyeAdres, new { @class = "form-control" })
+                    <br />
+                    <label class="form-group">Puan</label>
+                    @Html.TextBoxFor(x => x.uyePuan, new { @class = "form-control" })
+                    <br />
+                    <label class="form-group">Rol</label>
+                    @Html.TextBoxFor(x => x.uyeRol, new { @class = "form-control" })
+                    <br />
+                    @Html.HiddenFor(x => x.uyeID)
+                    <button class="btn btn-outline-primary">Güncelle</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+

@@ -1,0 +1,32 @@
+﻿@model OnBirEkimKutuphane.Models.entity.iade
+@{
+    ViewBag.Title = "yeniiade";
+    Layout = "~/Views/default_layout.cshtml";
+}
+
+<br />
+<h2 class="popover-header">Yeni İade Ver</h2>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <label class="form-group">İade Kitap</label>
+                @Html.DropDownListFor(x => x.kitap, (List<SelectListItem>)ViewBag.ktplr, new { @class = "form-control" })
+                <br />
+                <label class="form-group">İade Eden</label>
+                @Html.DropDownListFor(x => x.iadeeden, (List<SelectListItem>)ViewBag.uyelr, new { @class = "form-control" })
+                <br />
+                <label class="form-group">İade Alan</label>
+                @Html.DropDownListFor(x => x.iadealan, (List<SelectListItem>)ViewBag.prslr, new { @class = "form-control" })
+                <br />
+                <label class="form-group">İade Tarihi</label>
+                @Html.TextBoxFor(x => x.iadetarihi, new { @class = "form-control" })
+
+                <button class="btn btn-outline-primary">Kaydet</button>
+            </form>
+
+        </div>
+
+    </div>
+</div>

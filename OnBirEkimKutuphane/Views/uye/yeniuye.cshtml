@@ -1,0 +1,42 @@
+﻿@model OnBirEkimKutuphane.Models.entity.uye
+@{
+    ViewBag.Title = "yeniuye";
+    Layout = "~/Views/default_layout.cshtml";
+}
+
+<br />
+<h2 class="popover-header">Yeni Üye Ekleme Sayfası</h2>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <label class="form-group">Üye Adı Soyadı:</label>
+                <input type="text" name="uyeAdiSoyadi" class="form-control" />
+                <br />
+                <label class="form-group">Cinsiyet</label>
+                <input type="text" name="uyeCinsiyet" class="form-control" />
+                <br />
+                <label class="form-group">Üye Doğum Tarihi</label>
+                
+                @*@Html.TextBoxFor(x=>x.uyeDogumTarihi,new  { @class="form-control"})*@
+                <input type="datetime" name="uyeDogumTarihi" class="form-control" placeholder="yyyy-aa-gg" />
+                <br />
+                <label class="form-group">Üye Adres:</label>
+                <input type="text" name="uyeAdres" class="form-control" placeholder="ilçe/il" />
+                <br />
+                <label class="form-group">Üye Puan:</label>
+                <input type="text" name="uyePuan" class="form-control" />
+                <br />
+                <label class="form-group">Üye Rol:</label>
+                <input type="text" name="uyeRol" class="form-control" placeholder="2" />
+                <br />
+                <button class="btn btn-outline-primary">Kaydet</button>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+

@@ -1,0 +1,28 @@
+﻿@model OnBirEkimKutuphane.Models.entity.yazar
+@{
+    ViewBag.Title = "yeniyazar";
+    Layout = "~/Views/default_layout.cshtml";
+}
+
+<br />
+<h2 class="popover-header">Yeni Kitap Ekleme Sayfası</h2>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <label class="form-group">Yazar Adı</label>
+                <input type="text" name="yazarAdi" class="form-control" />
+                <br />
+                <label class="form-group">Yazar Soyadı</label>
+                <input type="text" name="yazarSoyadi" class="form-control" />
+                <br />
+
+                <button class="btn btn-outline-primary">Kaydet</button>
+            </form>
+           
+            </div>
+        
+        </div>
+    </div>
+

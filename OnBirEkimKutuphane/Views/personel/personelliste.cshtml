@@ -1,0 +1,32 @@
+﻿@using OnBirEkimKutuphane.Models.entity
+@model List<personel>
+@{
+    ViewBag.Title = "personelliste";
+    Layout = "~/Views/default_layout.cshtml";
+}
+
+<br />
+<h2 class="popover-header">Personel Liste</h2>
+<br />
+
+<table class="table table-hover">
+    <tr>
+        <th>Personel Adi-Soyadi </th>
+        <th>Güncelle </th>
+        <th>Sil </th>
+    </tr>
+    @foreach (var p in Model)
+    {
+        <tr>
+            <td>@p.personelAdiSoyadi</td>
+            <td><a class="btn btn-success" href="/personel/perbul/@p.personelID">Güncelle</a></td>
+            <td><a class="btn btn-danger" href="/personel/personelsil/@p.personelID" >Sil</a></td>
+
+        </tr>
+    }
+
+
+</table>
+
+<a class="btn btn-outline-primary" href="/personel/yeniper/">Yeni Personel Ekle</a>
+

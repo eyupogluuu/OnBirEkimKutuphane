@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="26b8b05ecc3a481e9272381c06adf99d" Name="Diagram1">
+        <EntityTypeShape EntityType="KutuphaneDBModel.admin" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KutuphaneDBModel.kategori" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KutuphaneDBModel.kitap" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="KutuphaneDBModel.personel" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KutuphaneDBModel.rol" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KutuphaneDBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KutuphaneDBModel.uye" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="KutuphaneDBModel.yazar" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="KutuphaneDBModel.FK_admin_rol" ManuallyRouted="false" />
+        <AssociationConnector Association="KutuphaneDBModel.FK_kitap_kategori" ManuallyRouted="false" />
+        <AssociationConnector Association="KutuphaneDBModel.FK_kitap_yazar" ManuallyRouted="false" />
+        <AssociationConnector Association="KutuphaneDBModel.FK_uye_rol" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="KutuphaneDBModel.iade" Width="1.5" PointX="5.25" PointY="7.75" />
+        <EntityTypeShape EntityType="KutuphaneDBModel.odunc" Width="1.5" PointX="8.25" PointY="4.75" />
+        <AssociationConnector Association="KutuphaneDBModel.FK_iade_kitap" />
+        <AssociationConnector Association="KutuphaneDBModel.FK_iade_personel" />
+        <AssociationConnector Association="KutuphaneDBModel.FK_iade_uye" />
+        <AssociationConnector Association="KutuphaneDBModel.FK_odunc_kitap" />
+        <AssociationConnector Association="KutuphaneDBModel.FK_odunc_personel" />
+        <AssociationConnector Association="KutuphaneDBModel.FK_odunc_uye" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
